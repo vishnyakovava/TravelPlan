@@ -1,4 +1,4 @@
-package ru.netcracker.TravelPlanner;
+package ru.netcracker.travelplanner;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

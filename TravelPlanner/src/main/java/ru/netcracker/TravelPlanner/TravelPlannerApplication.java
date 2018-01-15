@@ -1,4 +1,4 @@
-package ru.netcracker.TravelPlanner;
+package ru.netcracker.travelplanner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
