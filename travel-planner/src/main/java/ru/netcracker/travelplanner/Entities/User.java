@@ -9,7 +9,7 @@ public class User {
     @Id
     @Column(name="id", length = 6, nullable = false)
     @GeneratedValue(generator = "increment")
-    @OneToMany(mappedBy = "user_id")
+//    @OneToMany(mappedBy = "user_id")
     private long id;
     @Column(name="email", nullable = false)
     private String Email;
