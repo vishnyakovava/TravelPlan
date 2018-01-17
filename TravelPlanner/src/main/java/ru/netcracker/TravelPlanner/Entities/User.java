@@ -1,42 +1,128 @@
-package ru.netcracker.travelplanner.Entities;
+package ru.netcracker.travelPlanner.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-@Entity(name="Users")
+@Entity
 @Table(name="users")
-public class User {
+public class User implements Serializable {
     @Id
-    @Column(name="id", length = 6, nullable = false)
-    @GeneratedValue(generator = "increment")
-//    @OneToMany(mappedBy = "user_id")
-    private long id;
-    @Column(name="email", nullable = false)
-    private String Email;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @SequenceGenerator(name = "users_seq", sequenceName = "user_id_seq")
+    private Integer id;
+
+    @Column(nullable = false)
+    private String email;
+
     @Column(name="first_name", length = 50, nullable = false)
-    private String FirstName;
+    private String firstName;
+
     @Column(name="last_name", length = 50, nullable = false)
-    private String LastName;
+    private String lastName;
+
     @Column(name="birth_date")
+    @Temporal(TemporalType.DATE)
     private Date BirthDate;
+
     @Column(name="is_admin", nullable = false)
-    private boolean IsAdmin;
+    private boolean isAdmin;
+
     @Column(name="registration_date", nullable = false)
-    private Date RegistrationDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date registrationDate;
+
     @Column(name="password", nullable = false)
-    private String Password;
+    private String password;
+
+    public User() {
+    }
+
+    public User(String email, String firstName, String lastName, Date birthDate, boolean isAdmin, Date registrationDate, String password) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        BirthDate = birthDate;
+        this.isAdmin = isAdmin;
+        this.registrationDate = registrationDate;
+        this.password = password;
+    }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", Email='" + Email + '\'' +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
+                ", Email='" + email + '\'' +
+                ", FirstName='" + firstName + '\'' +
+                ", LastName='" + lastName + '\'' +
                 ", BirthDate=" + BirthDate +
-                ", IsAdmin=" + IsAdmin +
-                ", RegistrationDate=" + RegistrationDate +
-                ", Password='" + Password + '\'' +
+                ", IsAdmin=" + isAdmin +
+                ", RegistrationDate=" + registrationDate +
+                ", Password='" + password + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Date getBirthDate() {
+        return BirthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        BirthDate = birthDate;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
