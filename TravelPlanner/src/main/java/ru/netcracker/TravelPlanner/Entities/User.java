@@ -3,6 +3,7 @@ package ru.netcracker.travelPlanner.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -34,6 +35,9 @@ public class User implements Serializable {
 
     @Column(name="password", nullable = false)
     private String password;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private Set<Route> routes;
 
     public User() {
     }
@@ -124,5 +128,13 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Route> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(Set<Route> routes) {
+        this.routes = routes;
     }
 }

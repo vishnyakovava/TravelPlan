@@ -2,10 +2,10 @@ package ru.netcracker.travelPlanner.entities;
 
 import org.postgresql.geometric.PGpoint;
 import org.postgresql.util.PGInterval;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="edges")
@@ -44,6 +44,9 @@ public class Edge implements Serializable{
     @Column(name = "end_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+
+    @OneToMany(mappedBy = "pk.edge")
+    private Set<RouteEdge> routeEdges;
 
     public Edge() {
     }
@@ -96,7 +99,7 @@ public class Edge implements Serializable{
         return transportType;
     }
 
-    public void setTransportType(short transportType) {
+    public void setTransportType(Short transportType) {
         this.transportType = transportType;
     }
 
@@ -138,5 +141,13 @@ public class Edge implements Serializable{
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public Set<RouteEdge> getRouteEdges() {
+        return routeEdges;
+    }
+
+    public void setRouteEdges(Set<RouteEdge> routeEdges) {
+        this.routeEdges = routeEdges;
     }
 }

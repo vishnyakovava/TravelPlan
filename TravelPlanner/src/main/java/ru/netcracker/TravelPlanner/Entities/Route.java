@@ -4,6 +4,7 @@ import org.postgresql.geometric.PGpoint;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name="routes")
@@ -12,6 +13,10 @@ public class Route implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "routes_seq")
     @SequenceGenerator(name = "routes_seq", sequenceName = "route_id_seq")
     private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name="creation_date", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
@@ -26,6 +31,9 @@ public class Route implements Serializable {
     @Column(name="route_type", nullable = false)
     private Short routeType;
 
+    @OneToMany(mappedBy = "pk.route")
+    private Set<RouteEdge> routeEdges;
+
     public Route() {
     }
 
@@ -34,6 +42,23 @@ public class Route implements Serializable {
         this.startPoint = startPoint;
         this.destinationPoint = destinationPoint;
         this.routeType = routeType;
+    }
+
+    public Route(User user, Date creationDate, PGpoint startPoint, PGpoint destinationPoint, Short routeType) {
+        this.user = user;
+        this.creationDate = creationDate;
+        this.startPoint = startPoint;
+        this.destinationPoint = destinationPoint;
+        this.routeType = routeType;
+    }
+
+    public Route(User user, Date creationDate, PGpoint startPoint, PGpoint destinationPoint, Short routeType, Set<RouteEdge> routeEdges) {
+        this.user = user;
+        this.creationDate = creationDate;
+        this.startPoint = startPoint;
+        this.destinationPoint = destinationPoint;
+        this.routeType = routeType;
+        this.routeEdges = routeEdges;
     }
 
     public Integer getId() {
@@ -74,5 +99,21 @@ public class Route implements Serializable {
 
     public void setRouteType(Short routeType) {
         this.routeType = routeType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<RouteEdge> getRouteEdges() {
+        return routeEdges;
+    }
+
+    public void setRouteEdges(Set<RouteEdge> routeEdges) {
+        this.routeEdges = routeEdges;
     }
 }
