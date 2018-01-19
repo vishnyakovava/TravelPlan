@@ -2,9 +2,10 @@ package ru.netcracker.travelPlanner.entities;
 
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
+import java.io.Serializable;
 
 @Embeddable
-public class RouteEdgeId {
+public class RouteEdgeId implements Serializable {
     @ManyToOne
     private Route route;
 

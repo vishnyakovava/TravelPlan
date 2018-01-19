@@ -45,8 +45,8 @@ public class Edge implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
-    @OneToMany(mappedBy = "pk.edge")
-    private Set<RouteEdge> routeEdges;
+//    @OneToMany(mappedBy = "pk.edge")
+//    private Set<RouteEdge> routeEdges;
 
     public Edge() {
     }
@@ -143,11 +143,11 @@ public class Edge implements Serializable{
         this.endDate = endDate;
     }
 
-    public Set<RouteEdge> getRouteEdges() {
-        return routeEdges;
-    }
-
-    public void setRouteEdges(Set<RouteEdge> routeEdges) {
-        this.routeEdges = routeEdges;
-    }
+//    public Set<RouteEdge> getRouteEdges() {
+//        return routeEdges;
+//    }
+//
+//    public void setRouteEdges(Set<RouteEdge> routeEdges) {
+//        this.routeEdges = routeEdges;
+//    }
 }
